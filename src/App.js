@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Buttons from './Components/Buttons'
+import Timer from './Components/Timer'
+import {useEffect, useState} from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [start, setStart] = useState(false);
+  const [pause, setPause] = useState(false);
+
+  useEffect( () => {
+    let timer;
+    if(start && !pause) {
+      timer = setInterval(() => {
+        setCount((prevState)=>prevState + 10)
+      }, 10);
+    }else {
+      clearInterval(timer);
+    }
+    return ()=>clearInterval(timer)
+  }, [start, pause]);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Timer count={count} />  
+      <Buttons start={start}  setStart={setStart} setCount={setCount} pause={pause} setPause={setPause}/>
     </div>
   );
 }

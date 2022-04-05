@@ -1,0 +1,16 @@
+span {
+  font-size: 4rem;
+  color: white;
+  font-weight: bold;
+}
+
+.timer span:nth-child(odd) {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.219);
+  padding: 0.3rem 0.8rem;
+}
+
+.timer {
+  margin-top: 5rem;
+  margin-bottom: 15rem;
+}
